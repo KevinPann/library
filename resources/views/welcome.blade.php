@@ -13,7 +13,7 @@
         <thead>
             <tr>
                 <td class="p-4 bg-gray-200 font-bold"><a href="/?sort=title&order={{ $order }}">Book Title</a></td>
-                <td class="p-4 bg-gray-200 font-bold">Author</td>
+                <td class="p-4 bg-gray-200 font-bold"><a href="/?sort=author&order={{ $order }}">Author</a></td>
                 <td class="p-4 bg-gray-200 font-bold text-center"><a href="/?sort=release_date&order={{ $order }}">Book Release date</a></td>
             </tr>
         </thead>
@@ -22,11 +22,11 @@
             <td class="p-2"><a href="/book/{{ $book->id }}">{{ $book->title }}</a></td>
             <td class="p-2">
                 @foreach ($book->author as $author)
-                    @if ($loop->last)
-                    <span>{{ $author->first_name }} {{ $author->last_name }} ({{ $author->books()->count() }})</span>
-                    @else
-                    <span>{{ $author->first_name }} {{ $author->last_name }} ({{ $author->books()->count() }}),</span>
-                    @endif
+                @if ($loop->last)
+                <span><a href="/author/{{ $author->id }}">{{ $author->first_name }} {{ $author->last_name }} ({{ $author->books()->count() }})</a></span>
+                @else
+                <span>{{ $author->first_name }} {{ $author->last_name }} ({{ $author->books()->count() }}),</span>
+                @endif
                 @endforeach
             </td>
             <td class="p-2 text-center">{{ $book->release_date }}</td>
